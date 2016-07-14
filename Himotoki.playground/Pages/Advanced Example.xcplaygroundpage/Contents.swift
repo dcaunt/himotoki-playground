@@ -95,21 +95,15 @@ extension Band: Decodable {
     }
 }
 
-extension Band.Status: Decodable {
-    static func decode(e: Extractor) throws -> Band.Status {
-        let rawValue = try String.decode(e)
-        guard let result = Band.Status(rawValue: rawValue) else {
-            throw customError("Invalid raw value for Band.Status \(rawValue)")
-        }
-        return result
-    }
-}
+// Himotoki provides a protocol extension for RawRepresentable types
+extension Band.Status: Decodable {}
 
 //: Decoding
 let bandJSON = JSONObjectFromPlaygroundResource("bands", ext: "json")
 
 do {
     let response: Response<Band>? = try Response<Band>.decodeValue(bandJSON)
+    print(response?.objects.first?.name)
 } catch {
     error
 }
