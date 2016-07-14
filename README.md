@@ -5,6 +5,7 @@ A playground tutorial for the Swift JSON decoding library [Himotoki](https://git
 ## Getting Started
 
 - Clone this repository
+-  Run `git submodule update --init --recursive` in the root of the repository to fetch Himotoki
 -  Open `Himotoki-playground.xcworkspace`  (_not the playground_)
 -  Build the `Himotoki-iOS` scheme. 
 -  Run the Playground.
