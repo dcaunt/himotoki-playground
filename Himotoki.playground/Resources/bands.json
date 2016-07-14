@@ -1,0 +1,50 @@
+{
+  "objects": [
+    {
+      "name": "Beatles",
+      "homepage": "http://www.thebeatles.com/",
+      "active": "inactive",
+      "members": [
+        {
+          "name": "George Harrison",
+          "birth_date": "1943-02-25"
+        },
+        {
+          "name": "John Lennon",
+          "birth_date": "1940-10-09"
+        },
+        {
+          "name": "Paul McCartney",
+          "birth_date": "1942-06-18"
+        },
+        {
+          "name": "Ringo Starr",
+          "birth_date": "1940-07-07"
+        }
+      ]
+    },
+    {
+      "name": "The Rolling Stones",
+      "active": "active",
+      "members": [
+        {
+          "name": "Charlie Watts",
+          "birth_date": "1941-06-02"
+        },
+        {
+          "name": "Keith Richards",
+          "birth_date": "1943-12-18"
+        },
+        {
+          "name": "Mick Jagger",
+          "birth_date": "1943-07-26"
+        },
+        {
+          "name": "Ronnie Wood",
+          "birth_date": "1947-06-01"
+        }
+      ]
+    }
+  ],
+  "last_updated": "2016-05-17T22:43:04.000000+00:00"
+}
