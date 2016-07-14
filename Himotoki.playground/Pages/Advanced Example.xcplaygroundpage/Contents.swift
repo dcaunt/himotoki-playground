@@ -13,7 +13,8 @@ struct Response<T: Decodable> {
 struct Band {
     enum Status: String {
         case Active = "active"
-        case Inactive = "inactive"
+        case Hiatus = "hiatus"
+        case Disbanded = "inactive"
     }
 
     let name: String
