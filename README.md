@@ -1,6 +1,6 @@
 # Himotoki Playground
 
-A playground tutorial for the Swift JSON decoding library [Himotoki](https://github.com/ikesyo/Himotoki).
+A playground tutorial for the Swift JSON decoding library [Himotoki](https://github.com/ikesyo/Himotoki). This playground accompanies the blog post I wrote [here](http://davidcaunt.co.uk/himotoki-tutorial).
 
 ## Getting Started
 
