@@ -1,7 +1,7 @@
 import Foundation
 
-public func JSONObjectFromPlaygroundResource(name: String, ext: String) -> AnyObject {
-    let resourceURL = NSBundle.mainBundle().URLForResource(name, withExtension: ext)
-    let data = NSData(contentsOfURL: resourceURL!)
-    return try! NSJSONSerialization.JSONObjectWithData(data!, options: [])
+public func JSONObjectFromPlaygroundResource(_ name: String, ext: String) -> AnyObject {
+    let resourceURL = Bundle.main.url(forResource: name, withExtension: ext)
+    let data = try? Data(contentsOf: resourceURL!)
+    return try! JSONSerialization.jsonObject(with: data!, options: []) as AnyObject
 }

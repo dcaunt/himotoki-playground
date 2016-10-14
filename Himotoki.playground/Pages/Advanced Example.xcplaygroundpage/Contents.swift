@@ -6,7 +6,7 @@ import Himotoki
 /// A generic collection
 struct Response<T: Decodable> {
     let objects: [T]
-    let lastUpdated: NSDate?
+    let lastUpdated: Date?
 }
 
 //: Models
@@ -25,16 +25,16 @@ struct Band {
 
 struct BandMember {
     let name: String
-    let birthDate: NSDate
+    let birthDate: Date
 }
 
 //: Foundation extensions
 extension NSURL: Decodable {
-    public static func decode(e: Extractor) throws -> Self {
+    public static func decode(_ e: Extractor) throws -> Self {
         let rawValue = try String.decode(e)
 
         guard let result = self.init(string: rawValue) else {
-            throw DecodeError.Custom("Error parsing URL from string")
+            throw customError("Error parsing URL from string")
         }
 
         return result
@@ -42,26 +42,26 @@ extension NSURL: Decodable {
 }
 
 //: Himotoki Transformers
-public let DateTransformer = Transformer<String, NSDate> { dateString throws -> NSDate in
-    let dateFormatter = NSDateFormatter()
-    dateFormatter.locale = NSLocale(localeIdentifier: "en_US_POSIX")
+public let DateTransformer = Transformer<String, Date> { dateString throws -> Date in
+    let dateFormatter = DateFormatter()
+    dateFormatter.locale = Locale(identifier: "en_US_POSIX")
     dateFormatter.dateFormat = "yyyy-MM-dd"
-    dateFormatter.timeZone = NSTimeZone(abbreviation: "UTC")
+    dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
 
-    if let date = dateFormatter.dateFromString(dateString) {
+    if let date = dateFormatter.date(from: dateString) {
         return date
     }
 
     throw customError("Invalid date string: \(dateString)")
 }
 
-public let DateTimeTransformer = Transformer<String, NSDate> { dateString throws -> NSDate in
-    let dateFormatter = NSDateFormatter()
-    dateFormatter.locale = NSLocale(localeIdentifier: "en_US_POSIX")
+public let DateTimeTransformer = Transformer<String, Date> { dateString throws -> Date in
+    let dateFormatter = DateFormatter()
+    dateFormatter.locale = Locale(identifier: "en_US_POSIX")
     dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ'"
-    dateFormatter.timeZone = NSTimeZone(abbreviation: "UTC")
+    dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
 
-    if let date = dateFormatter.dateFromString(dateString) {
+    if let date = dateFormatter.date(from: dateString) {
         return date
     }
 
@@ -71,7 +71,7 @@ public let DateTimeTransformer = Transformer<String, NSDate> { dateString throws
 //: Decodable implementations for our models
 
 extension Response: Decodable {
-    static func decode<T: Decodable>(e: Extractor) throws -> Response<T> {
+    static func decode<T: Decodable>(_ e: Extractor) throws -> Response<T> {
         return try Response<T>(objects: e <|| "objects",
             lastUpdated: DateTimeTransformer.apply(e <|? "last_updated")
         )
@@ -79,7 +79,7 @@ extension Response: Decodable {
 }
 
 extension BandMember: Decodable {
-    static func decode(e: Extractor) throws -> BandMember {
+    static func decode(_ e: Extractor) throws -> BandMember {
         return try BandMember(name: e <| "name",
             birthDate: DateTransformer.apply(e <| "birth_date")
         )
@@ -87,7 +87,7 @@ extension BandMember: Decodable {
 }
 
 extension Band: Decodable {
-    static func decode(e: Extractor) throws -> Band {
+    static func decode(_ e: Extractor) throws -> Band {
         return try Band(name: e <| "name",
             members: e <|| "members",
             homepageURL: e <|? "homepage",
@@ -104,7 +104,6 @@ let bandJSON = JSONObjectFromPlaygroundResource("bands", ext: "json")
 
 do {
     let response: Response<Band>? = try Response<Band>.decodeValue(bandJSON)
-    print(response?.objects.first?.name)
 } catch {
     error
 }
