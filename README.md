@@ -1,6 +1,6 @@
 # Himotoki Playground
 
-A playground tutorial for the Swift JSON decoding library [Himotoki](https://github.com/ikesyo/Himotoki). This playground accompanies the blog post I wrote [here](http://davidcaunt.co.uk/himotoki-tutorial).
+A playground tutorial for the Swift JSON decoding library [Himotoki](https://github.com/ikesyo/Himotoki). This playground accompanies the blog post I wrote [here](http://davidcaunt.co.uk/himotoki-tutorial). The current version of this playground supports Xcode 8/Swift 3.0.
 
 ## Getting Started
 
